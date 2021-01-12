@@ -1,17 +1,122 @@
 // Progression #1: Greatest of the two numbers
+ 
+var greatestOfTwoNumbers = (num1,num2)=>
+{
+  if(num1>num2)
+  {
+    return num1;
+  }
+  else
+  {
+    return num2;
+  }
+}
+
 
 // Progression #2: The lengthy word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
+var findScaryWord = (words) => 
+{
+  if(words.length == 0) //return null if array is empty
+  return null;
+  var tempMax ="";
+  for ( let i=0 ; i <words.length ; i++) //iterate till array length
+  {  
+      if(words[i].length > tempMax.length)  //compare from 0 index names with empty string tempmax & store the max name in tempMax for further iteration comparison
+      {
+        tempMax = words[i];
+      }
+  }
+  return tempMax; // returns max value stored in tempMax after the full loop completion 
+}
+
+
 // Progression #3: Net Price
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
+
+var netPrice = (numbers)=>{
+  return numbers.map ((num)=>{
+     return num;
+    }).reduce((total, num) =>total + num)
+}
+ 
+// Progression #3.1: 
+const mixedArr = [63, 122, 'audi', 61, true, 'volvo', '20', 'lamborghini', 38, 156,[]];
+
+var add = (mixedArr) =>
+{ 
+  var nTotal = 0;
+  for(let i=0 ; i < mixedArr.length ;i++)
+  {
+    if(typeof(mixedArr[i]) == "object" || typeof(mixedArr[i]) == [])
+    {
+      return "Unsupported data type sir or ma'am";
+    }
+    if(typeof(mixedArr[i]) == "string")
+    {
+      nTotal +=mixedArr[i].length;
+    }
+    else if(typeof(mixedArr[i]) == Boolean)
+    {
+      if(mixedArr[i]==true)
+      {
+        nTotal += 1;
+      }
+      else
+      {
+        nTotal += 0;
+      }
+    }
+    else
+    {
+      nTotal += mixedArr[i];
+    }
+  }
+  return nTotal;
+}
 
 // Progression #4: Calculate the average
 // Progression 4.1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
+var midPointOfLevels = (numbersAvg) =>{
+  var nTotal =0;
+    if(numbersAvg.length == 0)
+    {
+      return null
+    }
+    else
+    {
+      nTotal = netPrice(numbersAvg);
+      return (nTotal/(numbersAvg.length + 1));
+    }
+}
+
+
 
 // Progression 4.2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
+
+var averageWordLength = (wordsArr) =>
+{
+  var nSum = 0;
+  if(wordsArr.length == 0)
+  {
+    return null;
+  }
+  else
+  {
+    for(let i = 0 ;i<wordsArr.length ;i++)
+    {
+      if(typeof(mixedArr[i]) == String)
+      {
+        nSum += mixedArr[i].length;
+      }
+    }
+    return (nSum/(mixedArr.length + 1));
+  }
+}
+
 
 // Progression #5: Unique arrays
 const wordsUnique = [
@@ -29,9 +134,55 @@ const wordsUnique = [
   'flour'
 ];
 
+var uniqueArray =(wordsUnique) =>{
+  var arr = []; 
+  var tempString ="";
+  if(wordsUnique.length == 0)
+  {
+      return null;
+  }
+  else
+  {
+    for(let i = 0 ; i<wordsUnique.length ;i++)
+    {
+      for(let j = 0 ; j<arr.length ;j++){
+        if(wordsUnique[i] != arr[j])
+        {
+          arr.push(wordsUnique[i]);
+        }
+      }
+    }
+    return arr;
+  }
+}
+
 // Progression #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
-
+var searchElement =(wordsFind,word)=>{
+  var bIsFound = 0;
+  if(wordsFind.length == 0)
+  {
+      return null;
+  }
+  else
+  {     
+    for(let i = 0 ; i<wordsFind.length ;i++)
+    {
+      if(word == wordsFind[i])
+      {
+        bIsFound = 1;
+      }
+    }
+    if(bIsFound == 1)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+}
 // Progression #7: Count repetition
 const wordsCount = [
   'machine',
