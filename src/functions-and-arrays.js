@@ -36,9 +36,16 @@ var findScaryWord = (words) =>
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
 var netPrice = (numbers)=>{
-  return numbers.map ((num)=>{
-     return num;
-    }).reduce((total, num) =>total + num)
+   if(numbers.length == 0)
+   {
+      return 0;
+   }
+   else
+   {
+      return numbers.map ((num)=>{
+        return num;
+        }).reduce((total, num) =>total + num)
+  }
 }
  
 // Progression #3.1: 
@@ -47,37 +54,44 @@ const mixedArr = [63, 122, 'audi', 61, true, 'volvo', '20', 'lamborghini', 38, 1
 var add = (mixedArr) =>
 { 
   var nTotal = 0;
-  for(let i=0 ; i < mixedArr.length ;i++)
+  if(mixedArr.length == 0)
   {
-    if(typeof(mixedArr[i]) == "object" || typeof(mixedArr[i]) == [])
-    {
-      return "Unsupported data type sir or ma'am";
-    }
-    if(typeof(mixedArr[i]) == "string")
-    {
-      nTotal +=mixedArr[i].length;
-    }
-    else if(typeof(mixedArr[i]) == Boolean)
-    {
-      if(mixedArr[i]==true)
-      {
-        nTotal += 1;
-      }
-      else
-      {
-        nTotal += 0;
-      }
-    }
-    else
-    {
-      nTotal += mixedArr[i];
-    }
+    return 0;
   }
-  return nTotal;
+  else
+  {
+      for(let i=0 ; i < mixedArr.length ;i++)
+      {
+        if(typeof(mixedArr[i]) == "object" || typeof(mixedArr[i]) == [])
+        {
+           return "Unsupported data type sir or ma'am";
+        }
+        if(typeof(mixedArr[i]) == "string")
+        {
+            nTotal +=mixedArr[i].length;
+        }
+        else if(typeof(mixedArr[i]) == Boolean)
+        {
+            if(mixedArr[i]==true)
+            {
+              nTotal += 1;
+            }
+            else
+            {
+              nTotal += 0;
+            }
+        }
+        else
+        {
+            nTotal += mixedArr[i];
+        }
+      }
+      return nTotal;
+}
 }
 
 // Progression #4: Calculate the average
-// Progression 4.1: Array of numbers
+// Progression 4.1: Array of numberss
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 var midPointOfLevels = (numbersAvg) =>{
   var nTotal =0;
@@ -88,8 +102,43 @@ var midPointOfLevels = (numbersAvg) =>{
     else
     {
       nTotal = netPrice(numbersAvg);
-      return (nTotal/(numbersAvg.length + 1));
+      return (nTotal/(numbersAvg.length));
     }
+}
+
+//const mixedArr = [6, 12, 'miami', 1, 'barca', '200', 'lisboa', 8, false];
+function avg(mixArrayAvg)
+{
+    var total=0;
+    if(mixArrayAvg.length==0)
+    return null;
+    for(let i=0 ; i < mixArrayAvg.length ;i++)
+    {
+        if(mixArrayAvg.length === 0)
+        {
+          return null;
+        }
+        else if(typeof(mixArrayAvg[i]) == "string")
+        {
+          total +=mixArrayAvg[i].length;
+        }
+        else if(typeof(mixArrayAvg[i]) == Boolean)
+        {
+          if(mixArrayAvg[i]==true)
+          {
+            total += 1;
+          }
+          else
+          {
+            total += 0;
+          }
+        }
+        else
+        {
+          total += mixArrayAvg[i];
+        }
+   }
+   return parseFloat((total/(mixArrayAvg.length)).toFixed(2)); //fixed added for value upto 2 decimals
 }
 
 
@@ -99,21 +148,28 @@ const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smar
 
 var averageWordLength = (wordsArr) =>
 {
-  var nSum = 0;
+  //var nSum = 0;
   if(wordsArr.length == 0)
   {
     return null;
   }
   else
   {
-    for(let i = 0 ;i<wordsArr.length ;i++)
-    {
-      if(typeof(mixedArr[i]) == String)
+    // for(let i = 0 ;i<wordsArr.length ;i++)
+    // {
+    //   if(typeof(mixedArr[i]) == "string")
+    //   {
+    //     nSum += mixedArr[i].length;
+    //   }
+    // }
+    // return (nSum/(mixedArr.length));
+    // Sum up all the quotes lengths
+      const totalAverage = wordsArr.reduce(function (sum, words) 
       {
-        nSum += mixedArr[i].length;
-      }
-    }
-    return (nSum/(mixedArr.length + 1));
+        return sum + words.length;
+      }, 0);
+      //Calculate avg length of the quotes
+      return (totalAverage / wordsArr.length);
   }
 }
 
@@ -145,12 +201,10 @@ var uniqueArray =(wordsUnique) =>{
   {
     for(let i = 0 ; i<wordsUnique.length ;i++)
     {
-      for(let j = 0 ; j<arr.length ;j++){
-        if(wordsUnique[i] != arr[j])
+        if(arr.indexOf(wordsUnique[i])==-1)
         {
           arr.push(wordsUnique[i]);
         }
-      }
     }
     return arr;
   }
@@ -183,6 +237,10 @@ var searchElement =(wordsFind,word)=>{
     }
   }
 }
+
+
+
+
 // Progression #7: Count repetition
 const wordsCount = [
   'machine',
@@ -197,6 +255,24 @@ const wordsCount = [
   'disobedience',
   'matter'
 ];
+function howManyTimesElementRepeated(wordsCount,wordToSearch)
+{
+    var nCount = 0;
+    if(wordsCount.length == 0)
+    {
+      return 0; 
+    }
+    else{
+      for(let i=0;i < wordsCount.length; i++)
+      {
+        if(wordsCount[i] == wordToSearch)
+        {
+          nCount ++;
+        }
+      }
+      return nCount;
+    }
+}
 
 // Progression #8: Bonus
 
@@ -212,3 +288,8 @@ const matrix = [
   [24, 55, 58, 05, 66, 73, 99, 26, 97, 17],
   [21, 36, 23, 09, 75, 00, 76, 44, 20, 45]
 ];
+
+function maximumProduct()
+{
+  return 1
+}
